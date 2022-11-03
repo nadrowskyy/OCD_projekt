@@ -1,0 +1,129 @@
+{% extends 'schedule/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Utwórz szkolenie</title>
+
+
+</head>
+
+<body>
+
+<br><br>
+<h2 style="text-align:center;">UTWÓRZ SZKOLENIE</h2>
+<br>
+
+<div class="container" style="max-width:800px;">
+
+<form action="" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <br><br>
+    <div class="row">
+            {% for message in messages %}
+                <errormsg>{{ message }}</errormsg>
+            <br><br>
+            {% endfor %}
+        </div>
+    <div class="form-group">
+        <label for="title">Temat szkolenia</label>
+        <input class="form-control" id="title" name="title" placeholder="Wpisz temat szkolenia" required type="text" maxlength="200">
+    </div>
+
+    <div class="form-group">
+        <label>Opis szkolenia</label>
+        <textarea class="form-control" name="description" id="description2" placeholder="Opisz szkolenie" required rows="4" maxlength="1000"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="link">Lokalizacja szkolenia (miejsce lub link)</label>
+        <input class="form-control" id="link" name="link" placeholder="Podaj lokalizację szkolenia" type="text">
+    </div>
+
+    <div class="form-group">
+
+        <label for="organizer">Organizator</label><br>
+            <select class="selectOrganizer" id="organizer" name="organizer" style="width: 100%;">
+                {% for i in fullnames %}
+                <option value="{{i.id}}">{{i.first_name}} {{i.last_name}} ({{i.email}})</option>
+                {% endfor %}
+md
+            </select>
+    </div>
+
+    <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <label for="planning_date">Data i godzina rozpoczęcia</label>
+        <input class="form-control" id="planning_date" min="{% now 'Y-m-d\TH:i' %}" name="planning_date" type="datetime-local"
+               value="{% now 'Y-m-d\TH:i' %}" required>
+    </div>
+    <div class="col-md-12 col-lg-6">
+     <label for="duration">Czas trwania (min.)</label>
+        <input class="form-control" id="duration" min="1" name="duration" placeholder="1" type="number" required>
+    </div>
+  </div>
+<br>
+    <br>
+    <div class="row">
+    <div class="col-md-12 col-lg-12">
+    <div class="form-group">
+        <div class="form-group files">
+            <label>Prześlij ikonę</label>
+            <input accept="image/*" id="id_icon" name="icon" type="file">
+        </div>
+    </div>
+    </div>
+
+    </div>
+    <br>
+    <center><button class="btn btn-secondary" style="width:20%;font-family: 'Oswald', sans-serif;" type="submit">Utwórz</button></center>
+    <br>
+</form>
+</div>
+
+
+
+
+    <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/select2.min.js' %}"></script>
+
+<script>
+
+    $(document).ready(function() {
+    $('.selectOrganizer').select2();
+    $('#add_date').click(function () {
+       $('#plan_container').append('<div class="col-md-12 col-lg-6"> <input class="form-control" name="planning_date_draft" type="datetime-local" required><button class="remove_date btn btn-secondary" style="font-family: \'Oswald\', sans-serif;" type="button">Usuń termin</button><br><br></div>')
+    });
+    });
+
+</script>
+
+<script>
+    function hideA(x) {
+   if (x.checked) {
+     document.getElementById("poll").style.display = "block";
+     //document.getElementById("planning_date_div").style.display = "none";
+   }
+        $('#radio_publish').prop('checked',false);
+     $('#radio_draft').prop('checked',true);
+   $('#description2').prop('required',false);
+   $('#duration').prop('required',false);
+   $('#planning_date').prop('required',false);
+ }
+
+
+ $(document).on('click', '.remove_date', function () {
+     $(this).closest('div').remove();
+ });
+</script>
+
+
+</body>
+</html>
+
+{% endblock %}

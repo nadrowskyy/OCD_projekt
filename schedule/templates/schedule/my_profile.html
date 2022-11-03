@@ -1,0 +1,228 @@
+{% extends 'schedule/base.html' %}
+{% load static %}
+{% load auth_extras %}
+{% block content %}
+
+
+<head xmlns="http://www.w3.org/1999/html">
+    <meta charset="UTF-8">
+    <title>Mój profil</title>
+</head>
+<body>
+
+
+
+<div class="container" style="max-width:1000px">
+
+
+	{% csrf_token %}
+
+    <br>
+    <h2 style="text-align:center;">PROFIL UŻYTKOWNIKA</h2>
+    <br>
+
+<div class="row gutters" >
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+<div class="card h-200" style="text-align:center;">
+	<div class="card-body">
+		<div class="row gutters">
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="full_name">Imię i nazwisko:</label>
+                    <h4 id="full_name">{{request.user.first_name}} {{request.user.last_name}}</h4>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="group">Grupa:</label>
+					{% if request.user.groups.all.0.name == "admin" %}
+                    <h4 id="group">Administrator</h4>
+					{% elif request.user.groups.all.0.name == "employee"  %}
+					<h4 id="group">Użytkownik</h4>
+					{% else %}
+					<h4 id="group">{{request.user.groups.all.0.name}}</h4>
+					{% endif %}
+
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="email">E-mail:</label>
+                    <h4 id="email">{{request.user.email}}</h4>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="username">Nazwa użytkownika:</label>
+                    <h4 id="username">{{request.user.username}}</h4>
+				</div>
+			</div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="date_joined">Data i czas rejestracji:</label>
+                    <h4 id="date_joined">{{request.user.date_joined}}</h4>
+				</div>
+			</div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="last_login">Data i czas ostaniego logowania:</label>
+                    <h4 id="last_login">{{request.user.last_login}}</h4>
+				</div>
+			</div>
+		</div>
+
+			<center><button type="button" class="btn btn-secondary" style="width:20%;font-family: 'Oswald', sans-serif;" data-toggle="modal" data-target="#exampleModalCenter">Edytuj</button></center>
+<!-- Modal -->
+				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+					<form class="modal-content" method="POST" action="">
+					  <div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Edytuj swój profil</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+
+						<div class="container">
+					  <div class="modal-body">
+						  <div class="row">
+
+							  {% csrf_token %}
+						<div class="col-xl-6 col-lg-6 col-md-6">
+							<label for="first_name">Imię:</label>
+							<input class="form-control" type="text" name="first_name" id="first_name" value="{{request.user.first_name}}" required>
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-6">
+							<label for="last_name">Nazwisko:</label>
+							<input class="form-control" type="text" name="last_name" id="last_name" value="{{request.user.last_name}}" required>
+						</div>
+						  </div>
+						  <br>
+						<div class="form-group">
+							<label for="email">E-mail:</label>
+							<input class="form-control" type="email" name="email" id="email_" value="{{request.user.email}}" required>
+						</div>
+
+
+
+
+					  <div class="modal-footer">
+						  <input class="form-control" type="text" name="change_profile" value="1" hidden>
+						<button type="button" class="btn btn-secondary" style="width:20%;font-family: 'Oswald', sans-serif;" data-dismiss="modal">Anuluj</button>
+						<button class="btn btn-secondary" id="submitButton" style="width:20%;font-family: 'Oswald', sans-serif;" type="submit">Zapisz</button>
+				  </div>
+						</form>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+	<br>
+    <h2 style="text-align:center;">ZMIANA HASŁA</h2>
+    <br>
+<div class="row gutters" >
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+<div class="card h-200" style="text-align:center;">
+	<div class="form-group">
+		<form method="POST">
+			<div>
+			{{form.non_field_errors}}
+			{% csrf_token %}
+				<br>
+			{% for field in form %}
+    			<div class="row">
+       				<div class="col-md-2 push-4" style="text-align:left;margin-top: 10px;">
+        				{{ field.label_tag }}
+					<sup>{{ field.help_text }}</sup>
+					</div><div class="col-md-10" style="margin-top: 10px;">
+         				{{ field }}
+					</div>
+    			</div>
+			{% if field.errors %}
+				<errormsg style="text-align: center;">{{ field.errors }}</errormsg>
+			{% endif %}
+ 			{% endfor %}
+			</div>
+			<div id="pointer_not">
+			    <center><button id="password_ch" class="btn btn-secondary" style="width:20%;font-family: 'Oswald', sans-serif;" type="submit">Zmień hasło</button></center>
+			</div>
+		</form>
+	</div>
+	{% for message in messages %}
+		<div class="isa_success">
+		 <i class="fa fa-check"></i>
+			<succesmsg style="text-align:center;">{{ message }}</succesmsg><br><br>
+
+		</div>
+	{% endfor %}
+
+</div>
+</div>
+</div>
+
+		<br><br>
+
+    <h2 style="text-align:center;">PROWADZONE SZKOLENIA ({{events_cnt}})</h2>
+    <br>
+
+    {% for i in my_events %}
+<div class="row gutters" >
+	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		<div class="card">
+			<h4 class="card-header"><img class="rounded-circle" src="{{MEDIA_URL}}{{i.icon}}" alt="" width="50" height="50">&nbsp;&nbsp;<a class="h4" href="{% url 'event_details' i.id %}">{{i.title}}</a>
+				&nbsp;
+			<a href="{% url 'event_edit' i.id %}"><img src="{% static 'images/icons/edit.png' %}" style="text-align:right; width:25px; height:25px;"></a>
+				{% if request.user|has_group:"admin" %}
+				<a href="{% url 'delete_event' i.id %}" onclick="return confirm('Czy na pewno chcesz usunąć szkolenie {{i.title}}? \n\nOperacji nie będzie można cofnąć!');"><img src="{% static 'images/icons/delete.png' %}" style="text-align:right; width:25px; height:25px;"></a>
+				{% endif %}
+			</h4>
+    		<br>
+       		 <h5 class="card-text" id="like_count">Opis: {{ i.description }}</h5><br>
+			<div class="card-footer text-muted" style="text-align:center;">
+				{{i.planning_date}}
+			</div>
+		</div>
+	<br>
+	{% endfor %}
+		</div>
+</div>
+		<br><br>
+
+
+		<br><br>
+
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+
+
+	<script>
+
+	$(document).ready(function(){
+
+	$('#id_new_password1, #id_new_password2').on('keyup', function () {
+	 // var text = $('#message').text();
+	 if ($('#id_new_password1').val() === $('#id_new_password2').val()) {
+		 $('#password_ch').css("pointer-events", "");
+		 $('#pointer_not').css("cursor", "pointer");
+
+	 } else
+		 $('#password_ch').css("pointer-events", "none");
+	 	 $('#pointer_not').css("cursor", "not-allowed");
+	 });
+
+	});
+</script>
+
+
+
+</body>
+</html>
+
+{% endblock %}

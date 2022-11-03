@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+{% load auth_extras %}
+{% load static %}
+
+{% block content %}
+
+<head>
+	<title>FFT - Food For Thought</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+
+	<link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap_old.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+
+
+<nav class="navbar navbar-toggleable-md bg-faded navbar-light sticky-top">
+	<div class="container">
+		<a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo-light2.png' %}" style="max-height: 80px" id="logo"></a>
+
+		  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+				<ul class="navbar-nav navbar-default">
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'home' %}">Strona główna</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'events_list' %}">Szkolenia</a>
+					</li>
+
+
+					{% if request.user|has_group:"admin" %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'users_list' %}">Użytkownicy</a>
+					</li>
+					{% endif %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'about' %}">O aplikacji</a>
+					</li>
+				</ul>
+
+                {% if request.user|has_group:"admin" %}
+				<button class="btn navbar-btn"><a href="{% url 'create_event' %}"><span>Utwórz szkolenie</span></a></button>
+                {% endif %}
+
+                {% if not user.is_authenticated %}
+                <button class="btn navbar-btn"><a href="{% url 'login' %}"><span>Logowanie</span></a></button>
+                <button class="btn navbar-btn"><a href="{% url 'register' %}"><span>Rejestracja</span></a></button>
+                {% else %}
+                <div class="dropdown">
+					  <a class="btn navbar-btn dropdown-toggle" style="height:38px;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  {{request.user}}
+					  </a>
+
+
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+						  <a class="dropdown-item" href="{% url 'my_profile' %}">Profil</a>
+
+						  <hr style="margin:5px;">
+						  <a class="dropdown-item" href="{% url 'logout' %}" onclick="sessionStorage.clear()">Wyloguj</a>
+					  </div>
+
+				</div>
+                {% endif %}
+
+
+		</div>
+
+
+
+
+	</div>
+
+
+
+
+</nav>
+
+<script type="text/javascript">
+		$(document).ready(function () {
+        var url = window.location.href.split('?')[0];
+        $('li.nav-item a[href="'+ url +'"]').parent().addClass('active');
+        $('li.nav-item a').filter(function() {
+             return this.href == url;
+        }).parent().addClass('active');
+    });
+</script>
+
+
+
+{% endblock %}

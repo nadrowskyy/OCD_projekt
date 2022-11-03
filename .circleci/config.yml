@@ -1,0 +1,20 @@
+version: 2.1
+orbs:
+  python: circleci/python@1.2
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - run:
+          name: Setup testing environment
+          command: |
+            pip install -r requirements.txt
+            echo $HOME
+      - store_artifacts:
+          path: htmlcov
+workflows:
+  test-and-deploy:
+    jobs:
+      - build-and-test

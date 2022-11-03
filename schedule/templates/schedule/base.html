@@ -1,0 +1,41 @@
+{% load static %}
+{% load auth_extras %}
+
+<!doctype html>
+<html lang="pl">
+
+
+
+<head>
+	<title>BuiBui App</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'images/icons/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/datatables.bootstrap4.min.css' %}" rel="stylesheet">
+</head>
+  <body>
+  {% include 'schedule/navbar.html' %}
+
+{% block content %}
+
+
+
+    <script src="{% static 'js/select2.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.datatables.min.js' %}"></script>
+    <script src="{% static 'js/datatables.bootstrap4.min.js' %}"></script>
+    <script src="https://cdn.jsdeliver.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+<script>
+$(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+</script>
+
+
+  </body>
+</html>
+
+{% endblock %}
