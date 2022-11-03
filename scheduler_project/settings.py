@@ -134,24 +134,9 @@ GS_BUCKET_NAME = os.environ['GS_BUCKET_NAME']
 MEDIA_URL = os.environ['MEDIA_URL']
 
 
-variables_keys = {
-  "type": os.environ['V_TYPE'],
-  "project_id": os.environ['V_PROJECT_ID'],
-  "private_key_id": os.environ['V_PRIVATE_KEY_ID'],
-  "private_key": os.environ['V_PRIVATE_KEY'],
-  "client_email": os.environ['V_CLIENT_EMAIL'],
-  "client_id": os.environ['V_CLIENT_ID'],
-  "auth_uri": os.environ['V_AUTH_URI'],
-  "token_uri": os.environ['V_TOKEN_URI'],
-  "auth_provider_x509_cert_url": os.environ['V_auth_provider_x509_cert_url'],
-  "client_x509_cert_url": os.environ['V_client_x509_cert_url']
-}
-with open("credentials.json", "w") as outfile:
-    json.dump(variables_keys, outfile)
-
 
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, 'credentials.json')
+    os.path.join(BASE_DIR, 'dev-airlock-366820-871bc63cca31.json')
 )
 
 # Password validation
