@@ -2,16 +2,8 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   heroku: circleci/heroku@0.0.10
-jobs:
-  build-and-test:
-    docker:
-      - image: cimg/python:3.8
-      - image: circleci/openjdk:8-jdk
 
 workflows:
   test-and-deploy:
     jobs:
-      - build-and-test
-      - heroku/deploy-via-git:
-          requires:
-            - build-and-test
+      - heroku/deploy-via-git
