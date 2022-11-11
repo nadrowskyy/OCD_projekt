@@ -37,7 +37,7 @@ else:
 
 ALLOWED_HOSTS = ['*']
 
-DISABLE_COLLECTSTATIC=1
+#DISABLE_COLLECTSTATIC=1
 
 # Application definition
 
