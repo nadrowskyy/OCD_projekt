@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 import pymysql
 from google.oauth2 import service_account
-import json
 
 pymysql.install_as_MySQLdb()
 
@@ -37,7 +36,6 @@ else:
 
 ALLOWED_HOSTS = ['*']
 
-#DISABLE_COLLECTSTATIC=1
 
 # Application definition
 
@@ -105,12 +103,6 @@ DATABASES = {
         'NAME': os.environ['DB_NAME'],
         'USER': os.environ['DB_USER'],
         'PASSWORD': os.environ['DB_PASSWORD'],
-        # 'ENGINE': os.environ['DB_ENGINE'],
-        # 'HOST': os.environ['DB_HOST'],
-        # 'PORT': os.environ['DB_PORT'],
-        # 'NAME': os.environ['DB_NAME'],
-        # 'USER': os.environ['DB_USER'],
-        # 'PASSWORD': os.environ['DB_PASSWORD'],
         'OPTIONS': {
             'autocommit': True,
         },
@@ -133,11 +125,6 @@ GS_PROJECT_ID = os.environ['GS_PROJECT_ID']
 GS_BUCKET_NAME = os.environ['GS_BUCKET_NAME']
 MEDIA_URL = os.environ['MEDIA_URL']
 
-
-
-#GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-#    os.path.join(BASE_DIR, 'dev-airlock-366820-871bc63cca31.json')
-#)
 
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
