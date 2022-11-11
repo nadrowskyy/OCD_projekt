@@ -135,9 +135,14 @@ MEDIA_URL = os.environ['MEDIA_URL']
 
 
 
+#GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#    os.path.join(BASE_DIR, 'dev-airlock-366820-871bc63cca31.json')
+#)
+
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, 'dev-airlock-366820-871bc63cca31.json')
+    os.path.join(BASE_DIR, os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
 )
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
