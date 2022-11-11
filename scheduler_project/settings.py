@@ -140,8 +140,7 @@ MEDIA_URL = os.environ['MEDIA_URL']
 #)
 
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
-)
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
 
 
 # Password validation
