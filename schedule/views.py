@@ -75,23 +75,23 @@ def login_page(request):
         if not remember_me:
             request.session.set_expiry(0)
 
-        if User.objects.filter(username=username).exists():
-            user = User.objects.filter(username=username).first()
-            if user is not None:
-                if user.is_active:
-                    #  check 2fa
-                    request.session['mfa_code'] = user.id
-                    return redirect('mfa')
-                if not user.is_active:
-                    messages.success(request, 'Konto nieaktywne')
-                    return redirect('login')
-                if 'next' in request.POST:
-                    if not remember_me:
-                        request.session.set_expiry(0)
+        user = authenticate(request, username=username, password=password)
 
-                    return redirect(request.POST.get('next'))
-                else:
-                    return redirect('home')
+        if user is not None:
+            if user.is_active:
+                #  check 2fa
+                request.session['mfa_code'] = user.id
+                return redirect('mfa')
+            if not user.is_active:
+                messages.success(request, 'Konto nieaktywne')
+                return redirect('login')
+            if 'next' in request.POST:
+                if not remember_me:
+                    request.session.set_expiry(0)
+
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('home')
         else:
             messages.info(request, 'Nazwa użytkownika lub hasło są nieprawidłowe')
 
