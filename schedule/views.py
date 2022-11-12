@@ -125,7 +125,6 @@ def mfa_login(request):
                 server.starttls()
                 server.login(os.environ['EMAIL_HOST_USER'], os.environ['EMAIL_HOST_PASSWORD'])
                 server.sendmail('noreply@buibuibui.com', user.email, msg)
-
     else:
         return redirect('home')
 
