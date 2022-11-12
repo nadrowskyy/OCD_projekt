@@ -125,8 +125,8 @@ GS_BUCKET_NAME = os.environ['GS_BUCKET_NAME']
 MEDIA_URL = os.environ['MEDIA_URL']
 
 
-#GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-#    os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
 
 
 # Password validation
