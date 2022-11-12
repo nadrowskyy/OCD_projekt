@@ -2,6 +2,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_migrate
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import get_user_model
+import os
 
 
 @receiver(post_migrate)
@@ -15,7 +16,7 @@ def populate_models(sender, **kwargs):
     if not User.objects.filter(username='superuser').exists():
         User.objects.create_superuser(username='superuser',
                                       email='super@email.com',
-                                      password='super')
+                                      password=os.environ['SUPER_USER_PASSWORD'])
         suser = User.objects.get(username='superuser')
         admin = Group.objects.get(name='admin')
         suser.groups.add(admin)
