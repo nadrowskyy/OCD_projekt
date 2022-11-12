@@ -50,7 +50,6 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'schedule/home.html')
 
     def test_login_page_GET (self):
-        # nie wiem
         pass
 
     def test_login_POST (self):
