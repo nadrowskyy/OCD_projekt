@@ -2,6 +2,7 @@
 
  https://audytowanie.online/
 
+CircleCI status: [![CircleCI](https://dl.circleci.com/status-badge/img/gh/nadrowskyy/OCD_projekt/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/nadrowskyy/OCD_projekt/tree/main)
 
 Snyk report: [![Known Vulnerabilities](https://snyk.io/test/github/nadrowskyy/OCD_projekt/badge.svg "Snyk report")]
 
