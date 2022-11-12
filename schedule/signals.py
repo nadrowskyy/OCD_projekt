@@ -15,7 +15,7 @@ def populate_models(sender, **kwargs):
     User = get_user_model()
     if not User.objects.filter(username='superuser').exists():
         User.objects.create_superuser(username='superuser',
-                                      email='super@email.com',
+                                      email='carnetdjango@gmail.com',
                                       password=os.environ['SUPER_USER_PASSWORD'])
         suser = User.objects.get(username='superuser')
         admin = Group.objects.get(name='admin')
