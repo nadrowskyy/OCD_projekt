@@ -2,7 +2,37 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   heroku: circleci/heroku@0.0.10
-
+  coverage-reporter: codacy/coverage-reporter@13.5.2
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.8
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
+      - run:
+          name: Setup testing environment
+          command: |
+            pip install -r requirements.txt
+            echo $HOME
+      - run:
+          name: Run tests
+          command: |
+            TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
+            echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
+            cat circleci_test_files.txt
+            TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
+            TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/.py//g')
+            echo $TESTFILES
+            coverage run --source="." manage.py test --noinput --verbosity=2 --keepdb --debug-mode
+            coverage report
+            coverage xml
+            coverage html
+      - store_artifacts:
+          path: htmlcov
+      - coverage-reporter/send_report:
+          coverage-reports: 'coverage.xml'
+          project-token: $CODACY_API_TOKEN
 workflows:
   test-and-deploy:
     jobs:
