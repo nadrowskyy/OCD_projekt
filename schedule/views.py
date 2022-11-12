@@ -49,7 +49,6 @@ def captcha(request):
 def home_page(request):
     now = timezone.now()
     upcoming_events_list = Event.objects.filter(planning_date__gte=now)
-
     context = {'upcoming_events_list': upcoming_events_list}
 
     return render(request, 'schedule/home.html', context)
