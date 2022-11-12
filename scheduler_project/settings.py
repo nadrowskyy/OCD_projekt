@@ -26,7 +26,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
-# VARIABLES FOR DECODING/ENCODING EMAIL PASSWORD
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ['DEBUG'] == "1":
@@ -126,8 +125,8 @@ GS_BUCKET_NAME = os.environ['GS_BUCKET_NAME']
 MEDIA_URL = os.environ['MEDIA_URL']
 
 
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
+#GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#    os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
 
 
 # Password validation

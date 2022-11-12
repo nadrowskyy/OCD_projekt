@@ -6,9 +6,11 @@ from django.conf import settings
 from django.conf.urls import url
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetConfirmView, \
     PasswordResetCompleteView
+import os
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(os.environ['ADMIN_SITE'], admin.site.urls),
     path('', views.home_page, name='home'),
     path('events_list/', views.events_list, name='events_list'),
     path('register/', views.register_page, name='register'),
