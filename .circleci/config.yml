@@ -18,6 +18,8 @@ jobs:
       - run:
           name: Run tests
           command: |
+            echo ${GOOGLE_CREDENTIALS} > gcp_key.json
+            head gcp_key.json
             TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
             echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
             cat circleci_test_files.txt
