@@ -123,8 +123,6 @@ DEFAULT_FILE_STORAGE = os.environ['DEFAULT_FILE_STORAGE']
 GS_PROJECT_ID = os.environ['GS_PROJECT_ID']
 GS_BUCKET_NAME = os.environ['GS_BUCKET_NAME']
 MEDIA_URL = os.environ['MEDIA_URL']
-
-
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
 
