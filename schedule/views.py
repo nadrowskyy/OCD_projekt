@@ -123,7 +123,6 @@ def mfa_login(request):
                 messages.error(request, 'Kod niepoprawny.')
         else:
             form = MFA_Form()
-
             code_obj, created = MFAUser.objects.update_or_create(
                 user=user, defaults={"code": randint(100000, 999999)})
 
