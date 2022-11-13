@@ -5,6 +5,10 @@ orbs:
   coverage-reporter: codacy/coverage-reporter@13.5.2
 jobs:
   build-and-test:
+    filters:
+      branches:
+        only:
+          - main
     docker:
       - image: cimg/python:3.8
       - image: circleci/openjdk:8-jdk
