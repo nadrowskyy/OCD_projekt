@@ -30,6 +30,7 @@ import urllib
 import json
 from django.core.mail import send_mail
 from .forms import MFA_Form
+mfa_counter = 0
 
 
 def captcha(request):
@@ -99,6 +100,7 @@ def login_page(request):
 
 
 def mfa_login(request):
+    global mfa_counter
     if user_id := request.session.get('mfa_code'):
         user = User.objects.get(id__exact=user_id)
         if request.method == 'POST':
@@ -106,11 +108,17 @@ def mfa_login(request):
             if form.is_valid():
                 code_obj = MFAUser.objects.get(user__exact=user)
                 if int(code_obj.code) == int(form.cleaned_data.get("code")):
+                    mfa_counter = 0
                     login(request, user)
                     del request.session['mfa_code']
                     return redirect('home')
                 else:
                     messages.error(request, 'Kod niepoprawny.')
+                    mfa_counter += 1
+                    if mfa_counter >= 3:
+                        mfa_counter = 0
+                        del request.session['mfa_code']
+                        messages.error(request, 'Zbyt duża ilość błędnych prób. Należy zalogować się ponownie.')
             else:
                 messages.error(request, 'Kod niepoprawny.')
         else:
