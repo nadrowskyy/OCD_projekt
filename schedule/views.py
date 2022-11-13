@@ -204,7 +204,7 @@ def register_page(request):
 
         link = reverse('activate', kwargs={
             'uidb64': email_body['uid'], 'token': email_body['token']})
-        activate_url = 'https://' + '34.116.192.24' + link
+        activate_url = 'https://' + 'audytowanie.online' + link
 
         msg = f"From: noreply@buibuibui.com\r\nTo: {email}\r\nSubject: Aktywacja konta\n\n Czesc {user_obj.username}, kliknij w link aby aktywowac swoje konto {activate_url}"
         with smtplib.SMTP(host=os.environ['EMAIL_HOST'], port=int(os.environ['EMAIL_PORT'])) as server:
