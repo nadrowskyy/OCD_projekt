@@ -5,10 +5,6 @@ orbs:
   coverage-reporter: codacy/coverage-reporter@13.5.2
 jobs:
   build-and-test:
-    filters:
-      branches:
-        only:
-          - main
     docker:
       - image: cimg/python:3.8
       - image: circleci/openjdk:8-jdk
@@ -41,7 +37,10 @@ jobs:
 workflows:
   test-and-deploy:
     jobs:
-      - build-and-test
+      - build-and-test:
+          filters:
+            branches:
+              only: main
       - heroku/deploy-via-git:
           requires:
             - build-and-test
