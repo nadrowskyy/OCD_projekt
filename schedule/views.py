@@ -21,7 +21,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.db.models import Q
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_text, force_bytes
+from django.utils.encoding import force_str, force_bytes
 from .utils import token_generator
 import os
 import string
@@ -220,7 +220,7 @@ def register_page(request):
 def verification(request, uidb64, token):
 
     try:
-        ida = force_text(urlsafe_base64_decode(uidb64))
+        ida = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=ida)
         if not token_generator.check_token(user, token):
             messages.success(request, 'Konto już aktywowane.')
