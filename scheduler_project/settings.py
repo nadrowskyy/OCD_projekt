@@ -35,6 +35,8 @@ else:
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['https://audytowanie.online/', 'https://ocd-projekt.herokuapp.com/', '127.0.0.1', 'localhost']
+
 
 # Application definition
 
