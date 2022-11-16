@@ -35,7 +35,7 @@ else:
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://audytowanie.online/', 'https://ocd-projekt.herokuapp.com/']
+CSRF_TRUSTED_ORIGINS = [os.environ['TRUSTED_ORIGIN_1'], os.environ['TRUSTED_ORIGIN_2']]
 
 
 # Application definition
