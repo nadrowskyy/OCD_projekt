@@ -71,9 +71,9 @@ def login_page(request):
         else:
             messages.success(request, 'Nieprawidłowa reCAPTCHA. Spróbuj ponownie.')
             return redirect('login')
-
-        if not remember_me:
-            request.session.set_expiry(0)
+        request.session.set_expiry(900)
+        if remember_me:
+            request.session.set_expiry(6220800)
 
         user = authenticate(request, username=username, password=password)
 
