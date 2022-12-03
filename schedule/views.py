@@ -197,7 +197,7 @@ def register_page(request):
 
         email_body = {
             'user': user_obj,
-            'domain': current_site.domain,
+            'domain': 'audytowanie.online',
             'uid': urlsafe_base64_encode(force_bytes(user_obj.pk)),
             'token': token_generator.make_token(user_obj),
         }
@@ -734,7 +734,7 @@ def password_reset_request(request):
                         email_template_name = "schedule/password_reset_email.txt"
                         c = {
                             "email": user.email,
-                            'domain': domain,
+                            'domain': 'audytowanie.online',
                             'site_name': 'Interface',
                             "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                             "user": user,

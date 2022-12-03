@@ -35,7 +35,7 @@ else:
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [os.environ['TRUSTED_ORIGIN_1'], os.environ['TRUSTED_ORIGIN_2']]
+CSRF_TRUSTED_ORIGINS = [os.environ['TRUSTED_ORIGIN_1'], os.environ['TRUSTED_ORIGIN_2'], 'localhost', '127.0.0.1']
 
 
 # Application definition
